@@ -1,0 +1,13 @@
+# Basic build settings for a static site
+[build]
+  # The folder that contains your HTML, CSS, and client-side JS
+  publish = "public"
+  # The folder where your serverless functions live
+  functions = "netlify/functions"
+
+# Redirect and rewrite rules can be added here
+# For example, to make your serverless function accessible at /api/getStockData
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
