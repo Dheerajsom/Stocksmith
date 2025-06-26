@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stocksmith - Forge your futures</title>
-    <meta name="description" content="A modern stock analysis website providing real-time data, interactive charts, and an earnings calendar.">
+    <title>Stocksmith - Forge your future</title>
+    <meta name="description" content="A modern stock analysis website providing real-time data, interactive charts, and key financial metrics.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+       <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -21,7 +22,7 @@
             <a href="/" class="brand-logo">
                 <i class="fa-solid fa-chart-line"></i> Stocksmith
             </a>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 </ul>
         </nav>
@@ -29,44 +30,46 @@
 
     <main class="container">
         <section id="hero">
-            <h1>Modern Stock Analysis</h1>
-            <p>Get real-time stock data, interactive charts, and key financial metrics. Start by searching for a ticker symbol below.</p>
+            <h1>Unlock Market Insights</h1>
+            <p>Your portal to real-time stock data and financial analysis.</p>
             <form id="stock-search-form">
                 <div class="search-box">
-                    <input type="text" id="stock-ticker-input" placeholder="Enter a stock ticker (e.g., AAPL)" required>
-                    <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="stock-ticker-input" placeholder="Search by ticker (e.g., AAPL, TSLA, NVDA)" required autocomplete="off">
+                    <button type="submit">Search</button>
                 </div>
             </form>
         </section>
 
-        <section id="stock-display">
+        <section id="content-display">
             <div id="loader" class="hidden">
                 <div class="spinner"></div>
             </div>
 
-            <div id="error-message" class="hidden">
-                <p>
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    <span>Could not find data for the specified ticker. Please check the symbol and try again.</span>
-                </p>
+            <div id="error-message" class="card hidden">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="error-text"></span>
             </div>
 
             <div id="stock-result" class="hidden">
                 </div>
         </section>
 
-        <section id="watchlist">
-            <h2>My Watchlist</h2>
-            <div id="watchlist-container">
-                <p id="empty-watchlist-message">Your watchlist is empty. Add stocks using the search bar above.</p>
+        <section id="watchlist" class="card">
+            <div class="card-header">
+                <h2>My Watchlist</h2>
+                <i class="fa-solid fa-star"></i>
             </div>
+            <div id="watchlist-container">
+                <p id="empty-watchlist-message">Your watchlist is empty.</p>
+                </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
             <p>&copy; 2025 Stocksmith. All Rights Reserved.</p>
-            <p>Data provided by a third-party API. Not financial advice.</p>
+            <p class="disclaimer">Data is provided for informational purposes only. Not financial advice.</p>
         </div>
     </footer>
 
