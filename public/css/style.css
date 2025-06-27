@@ -58,28 +58,39 @@ a:hover {
 header {
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    padding: 20px 0;
+    padding: 0; /* Remove extra vertical padding */
     position: sticky;
     top: 0;
     z-index: 10;
     backdrop-filter: blur(10px);
+    height: px; /* Set a fixed height */
+    display: flex;
+    align-items: center;
 }
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align all nav content to the left */
     align-items: center;
+    padding: 0;
 }
 
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 12px; /* space between logo and text */
+    gap: 12px;
 }
+
+.nav-links {
+    margin-left: 40px; /* Space between logo/name and nav links */
+}
+
 .site-logo {
-    height: 36px;
-    width: 36px;
+    height: auto;
+    width: 80px;      
+    max-height: 70px; /* ensures it doesn't overflow header */
     object-fit: contain;
+    display: block;
 }
 .brand-logo-text {
     font-size: 1.5rem;
