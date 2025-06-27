@@ -71,6 +71,22 @@ nav {
     align-items: center;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between logo and text */
+}
+.site-logo {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+}
+.brand-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
 .brand-logo {
     font-size: 1.5rem;
     font-weight: 600;
