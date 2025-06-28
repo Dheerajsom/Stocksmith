@@ -331,15 +331,17 @@ main {
 /* ------------------------- */
 footer {
     text-align: center;
-    padding: 30px 0;
-    margin-top: 40px;
+    padding: 4px 0;         /* Even smaller vertical padding */
+    margin-top: 180px;      /* Push it further down */
     border-top: 1px solid var(--color-border);
     color: var(--color-text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.9rem;     
+    min-height: 24px;       
 }
+
 footer .disclaimer {
-    font-size: 0.8rem;
-    margin-top: 5px;
+    font-size: 0.9rem;      /* Even smaller disclaimer */
+    margin-top: 10px;
 }
 
 /* ------------------------- */
