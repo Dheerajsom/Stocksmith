@@ -77,8 +77,8 @@ nav {
 
 .nav-left {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-start; /* Align items to the top */
+    gap: 6px;                /* Reduce gap for closer spacing */
 }
 
 .nav-links {
@@ -92,10 +92,14 @@ nav {
     object-fit: contain;
     display: block;
 }
+
 .brand-logo-text {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 1px;
+    position: relative;
+    top: 12px;        /* Move text up */
+    left: -15px;      /* Move text slightly to the left */
 }
 
 .brand-logo {
