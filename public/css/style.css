@@ -52,37 +52,36 @@ a:hover {
     display: none !important;
 }
 
-/* ------------------------- */
 /* --- H E A D E R --- */
-/* ------------------------- */
 header {
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    padding: 0; /* Remove extra vertical padding */
+    padding: 10px 0; /* Give it a little vertical padding */
     position: sticky;
     top: 0;
     z-index: 10;
     backdrop-filter: blur(10px);
-    height: px; /* Set a fixed height */
     display: flex;
     align-items: center;
 }
 
+
 nav {
     display: flex;
-    justify-content: flex-start; /* Align all nav content to the left */
+    justify-content: space-between;
     align-items: center;
+    width: 100%; /* Ensure the nav fills the container */
     padding: 0;
 }
 
 .nav-left {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
-    gap: 6px;                /* Reduce gap for closer spacing */
+    align-items: center; /* Vertically centers the logo and text */
+    gap: 6px;
 }
 
 .nav-links {
-    margin-left: 280px;
+    margin-left: 0; /* REMOVE THE FIXED MARGIN */
     display: flex;
     gap: 18px;
     list-style: none;
@@ -125,8 +124,29 @@ nav {
     font-weight: 700;
     letter-spacing: 1px;
     position: relative;
-    top: 12px;        /* Move text up */
-    left: -15px;      /* Move text slightly to the left */
+    top: -3px;   
+    left: -15px;   
+}
+
+.header-nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    top: 20%;           /* Move buttons higher in the header */
+}
+
+header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1px 0;     /* Make header line smaller */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
 }
 
 .brand-logo {
@@ -153,7 +173,9 @@ main {
 }
 
 #hero {
+    display: block;
     text-align: center;
+    width: 100%;
     margin-bottom: 40px;
 }
 
@@ -167,6 +189,16 @@ main {
     font-size: 1.1rem;
     color: var(--color-text-secondary);
     margin-bottom: 30px;
+}
+
+.hero-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+    flex-wrap: nowrap;
 }
 
 .search-box {
