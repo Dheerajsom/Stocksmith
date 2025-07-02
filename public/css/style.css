@@ -128,14 +128,36 @@ nav {
     left: -15px;   
 }
 
+/* Centered nav links in header, including Home */
 .header-nav-links {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 30px;
-    top: 20%;           /* Move buttons higher in the header */
+    top: 20%;
 }
+
+.header-nav-links .nav-btn {
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 20px;
+    background: rgba(56,189,248,0.12);
+    color: var(--color-primary-accent);
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.header-nav-links .nav-btn:hover, .header-nav-links .nav-btn:focus {
+    background: var(--color-primary-accent);
+    color: #fff;
+    border: 1px solid var(--color-primary-accent);
+}
+
 
 .header-auth-links {
     position: absolute;
