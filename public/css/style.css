@@ -146,13 +146,14 @@ nav {
     gap: 14px;
 }
 
+
 .auth-btn {
-    padding: 8px 22px;
-    border-radius: 22px;
+    padding: 5px 14px;
+    border-radius: 18px;
     background: rgba(56,189,248,0.18);
     color: var(--color-primary-accent);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.92rem;
     border: 1.5px solid var(--color-primary-accent);
     transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
     text-decoration: none;
