@@ -1,3 +1,74 @@
+/* Neon orange effect for Trending */
+.neon-orange {
+    color: #ff9900;
+    text-shadow:
+        0 0 6px #37250d,
+        0 0 12px #ff9900,
+        0 0 180px #ffd700,
+        0 0 240px #ff9900;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: inherit;
+}
+.fire-text {
+    color: #ff7a00;
+    text-shadow:
+        0 0 1px #ffae42,
+        0 0 1px #ff7a00,
+        0 0 1px #ffd700;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    font-size: inherit;
+    vertical-align: inherit;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    display: inline;
+    transition: none;
+}
+
+.neon-green {
+    color: #39ff14;
+    text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff1499;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 1.3em;
+}
+
+.neon-red {
+    color: #ff1744;
+    text-shadow: 0 0 8px #ff1744, 0 0 16px #ff174499;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 1.3em;
+}
+/* --- H O M E  S T A T S  G R I D --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 40px 0 0 0;
+}
+
+.stat-card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 32px 20px 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 220px;
+    box-shadow: 0 2px 12px 0 rgba(56,189,248,0.04);
+}
+
+.stat-card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--color-primary-accent);
+    letter-spacing: 0.5px;
+}
 /* ------------------------- */
 /* --- C S S  V A R S --- */
 /* ------------------------- */
@@ -448,12 +519,17 @@ main {
 /* ------------------------- */
 footer {
     text-align: center;
-    padding: 4px 0;         /* Even smaller vertical padding */
-    margin-top: 180px;      /* Push it further down */
+    padding: 4px 0;
     border-top: 1px solid var(--color-border);
     color: var(--color-text-secondary);
-    font-size: 0.9rem;     
-    min-height: 24px;       
+    font-size: 0.9rem;
+    min-height: 24px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    background: var(--color-bg);
+    z-index: 100;
 }
 
 footer .disclaimer {
