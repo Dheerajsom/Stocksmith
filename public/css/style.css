@@ -1,3 +1,8 @@
+.nav-btn.active {
+    background: var(--color-primary-accent);
+    color: #fff;
+    border: 1px solid var(--color-primary-accent);
+}
 /* Neon orange effect for Trending */
 .neon-orange {
     color: #ff9900;
