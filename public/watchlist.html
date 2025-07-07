@@ -33,12 +33,12 @@
 </header>
 <main class="container">
     <section id="watchlist-section" class="card" style="max-width:500px;margin:40px auto 0 auto;">
-        <h2 style="text-align:center;margin-bottom:18px;">My Watchlist</h2>
-        <form id="add-stock-form" style="display:flex;gap:10px;justify-content:center;">
-            <input type="text" id="watchlist-ticker-input" placeholder="Add ticker (e.g., AAPL)" required style="flex:1;padding:10px;border-radius:6px;border:1px solid var(--color-border);font-size:1rem;">
-            <button type="submit" class="nav-btn" style="padding:8px 18px;">Add</button>
+        <h2 class="watchlist-title"><i class="fa-solid fa-eye"></i> My Watchlist</h2>
+        <form id="add-stock-form" class="watchlist-form">
+            <input type="text" id="watchlist-ticker-input" placeholder="Add ticker (e.g., AAPL)" required class="watchlist-input">
+            <button type="submit" class="watchlist-add-btn"><i class="fa-solid fa-plus"></i> Add</button>
         </form>
-        <ul id="watchlist-items" style="margin-top:24px;list-style:none;padding:0;"></ul>
+        <ul id="watchlist-items" class="watchlist-list"></ul>
     </section>
 </main>
 <footer>
@@ -48,7 +48,7 @@
     </div>
 </footer>
 <script>
-// Simple watchlist logic using localStorage
+// Modern watchlist logic using localStorage
 const form = document.getElementById('add-stock-form');
 const input = document.getElementById('watchlist-ticker-input');
 const list = document.getElementById('watchlist-items');
@@ -57,15 +57,19 @@ function renderWatchlist() {
     const items = JSON.parse(localStorage.getItem('watchlist') || '[]');
     list.innerHTML = '';
     if (items.length === 0) {
-        list.innerHTML = '<li style="color:var(--color-text-secondary);text-align:center;">No stocks in your watchlist.</li>';
+        list.innerHTML = '<li class="watchlist-empty">No stocks in your watchlist.</li>';
     } else {
         items.forEach((ticker, idx) => {
             const li = document.createElement('li');
-            li.style.display = 'flex';
-            li.style.justifyContent = 'space-between';
-            li.style.alignItems = 'center';
-            li.style.padding = '8px 0';
-            li.innerHTML = `<span style="font-weight:600;">${ticker}</span> <button data-idx="${idx}" style="background:none;border:none;color:var(--color-negative);cursor:pointer;font-size:1.1em;">&times;</button>`;
+            li.className = 'watchlist-item';
+            li.innerHTML = `
+                <div class="watchlist-ticker">
+                    <span class="ticker-badge">${ticker}</span>
+                </div>
+                <button class="remove-btn" data-idx="${idx}" title="Remove">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            `;
             list.appendChild(li);
         });
     }
@@ -85,9 +89,10 @@ form.addEventListener('submit', e => {
 });
 
 list.addEventListener('click', e => {
-    if (e.target.tagName === 'BUTTON') {
+    if (e.target.closest('.remove-btn')) {
         let items = JSON.parse(localStorage.getItem('watchlist') || '[]');
-        items.splice(e.target.dataset.idx, 1);
+        const idx = e.target.closest('.remove-btn').dataset.idx;
+        items.splice(idx, 1);
         localStorage.setItem('watchlist', JSON.stringify(items));
         renderWatchlist();
     }

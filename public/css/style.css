@@ -1,3 +1,126 @@
+/* --- MODERN WATCHLIST STYLES --- */
+.watchlist-title {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-primary-accent);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.watchlist-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.watchlist-input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--color-primary-accent);
+    font-size: 1.08rem;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.watchlist-input:focus {
+    border: 1.5px solid #67cff8;
+    box-shadow: 0 0 0 2px #38bdf855;
+}
+
+.watchlist-add-btn {
+    padding: 10px 22px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #38BDF8 60%, #0ea5e9 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 2px 8px 0 rgba(56,189,248,0.10);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.watchlist-add-btn:hover, .watchlist-add-btn:focus {
+    background: linear-gradient(90deg, #67cff8 60%, #38BDF8 100%);
+    box-shadow: 0 4px 16px 0 rgba(56,189,248,0.18);
+}
+
+.watchlist-list {
+    margin-top: 24px;
+    list-style: none;
+    padding: 0;
+    min-height: 40px;
+}
+
+.watchlist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #1F2937 80%, #232b36 100%);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px 0 rgba(56,189,248,0.04);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.watchlist-item:hover {
+    background: linear-gradient(90deg, #232b36 60%, #38BDF8 100%);
+    box-shadow: 0 4px 16px 0 rgba(56,189,248,0.10);
+}
+
+.watchlist-ticker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticker-badge {
+    background: linear-gradient(90deg, #38BDF8 60%, #0ea5e9 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border-radius: 6px;
+    padding: 6px 16px;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px 0 rgba(56,189,248,0.10);
+    border: none;
+    display: inline-block;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.remove-btn:hover, .remove-btn:focus {
+    background: #232b36;
+    color: var(--color-negative);
+}
+
+.watchlist-empty {
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: 18px 0 8px 0;
+    font-size: 1.08rem;
+}
 .nav-btn.active {
     background: var(--color-primary-accent);
     color: #fff;
