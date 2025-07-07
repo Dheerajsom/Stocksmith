@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocksmith - Earnings Calendar</title>
+    <meta name="description" content="View upcoming company earnings dates in a modern calendar.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/images/stocksmith.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .calendar-container {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            background: var(--color-card);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px 0 rgba(56,189,248,0.08);
+            padding: 32px 24px 24px 24px;
+        }
+        .calendar-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary-accent);
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+        .earnings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        .earnings-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #1F2937 80%, #232b36 100%);
+            border-radius: 10px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px 0 rgba(56,189,248,0.04);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .earnings-item:hover {
+            background: linear-gradient(90deg, #232b36 60%, #38BDF8 100%);
+            box-shadow: 0 4px 16px 0 rgba(56,189,248,0.10);
+        }
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #fff;
+            margin-right: 18px;
+            border: 1.5px solid #e5e7eb22;
+        }
+        .company-info {
+            flex: 1;
+        }
+        .company-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .company-ticker {
+            font-size: 0.98rem;
+            color: var(--color-primary-accent);
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .earnings-date {
+            font-size: 1.08rem;
+            color: var(--color-positive);
+            font-weight: 600;
+            margin-left: 18px;
+            white-space: nowrap;
+        }
+        @media (max-width: 600px) {
+            .calendar-container { padding: 12px 2vw; }
+            .earnings-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .earnings-date { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav style="position: relative;">
+        <div class="nav-left">
+            <img src="assets/images/stocksmith.png" alt="Logo" class="site-logo" />
+            <span class="brand-logo-text">Stocksmith</span>
+        </div>
+        <div class="header-nav-links">
+            <a class="nav-btn" href="index.html">Home</a>
+            <a class="nav-btn" href="watchlist.html">Watchlist</a>
+            <a class="nav-btn active" href="earnings-calendar.html">Earnings Calendar</a>
+            <a class="nav-btn" href="#news">News</a>
+        </div>
+        <div class="header-auth-links">
+            <a class="auth-btn" href="#signup">Sign up</a>
+            <a class="auth-btn signup" href="#login">Log In</a>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <section class="calendar-container">
+        <h2 class="calendar-title"><i class="fa-solid fa-calendar-days"></i> Earnings Calendar</h2>
+        <div class="earnings-list" id="earnings-list">
+            <!-- Earnings items will be injected here -->
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Stocksmith. All Rights Reserved.</p>
+        <p class="disclaimer">Data is provided for informational purposes only. Not financial advice.</p>
+    </div>
+</footer>
+<script>
+// Example data; in production, fetch from API
+const earningsData = [
+    {
+        logo: 'https://logo.clearbit.com/apple.com',
+        name: 'Apple Inc.',
+        ticker: 'AAPL',
+        date: '2025-07-10',
+    },
+    {
+        logo: 'https://logo.clearbit.com/microsoft.com',
+        name: 'Microsoft Corp.',
+        ticker: 'MSFT',
+        date: '2025-07-12',
+    },
+    {
+        logo: 'https://logo.clearbit.com/tesla.com',
+        name: 'Tesla, Inc.',
+        ticker: 'TSLA',
+        date: '2025-07-15',
+    },
+    {
+        logo: 'https://logo.clearbit.com/amazon.com',
+        name: 'Amazon.com, Inc.',
+        ticker: 'AMZN',
+        date: '2025-07-18',
+    },
+    {
+        logo: 'https://logo.clearbit.com/nvidia.com',
+        name: 'NVIDIA Corporation',
+        ticker: 'NVDA',
+        date: '2025-07-20',
+    },
+    {
+        logo: 'https://logo.clearbit.com/google.com',
+        name: 'Alphabet Inc.',
+        ticker: 'GOOGL',
+        date: '2025-07-22',
+    },
+];
+
+function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function renderEarningsCalendar() {
+    const list = document.getElementById('earnings-list');
+    list.innerHTML = '';
+    earningsData.forEach(company => {
+        const item = document.createElement('div');
+        item.className = 'earnings-item';
+        item.innerHTML = `
+            <img src="${company.logo}" alt="${company.name} logo" class="company-logo" onerror="this.src='assets/images/stocksmith.png'" />
+            <div class="company-info">
+                <span class="company-name">${company.name}</span>
+                <span class="company-ticker">(${company.ticker})</span>
+            </div>
+            <span class="earnings-date"><i class="fa-regular fa-clock"></i> ${formatDate(company.date)}</span>
+        `;
+        list.appendChild(item);
+    });
+}
+renderEarningsCalendar();
+</script>
+</body>
+</html>
