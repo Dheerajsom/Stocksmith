@@ -1,3 +1,42 @@
+    <style>
+        /* ...existing styles... */
+        .earnings-history {
+            margin-top: 12px;
+        }
+        .earnings-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #232b36;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.98rem;
+            margin-top: 4px;
+        }
+        .earnings-table th, .earnings-table td {
+            padding: 7px 12px;
+            text-align: center;
+        }
+        .earnings-table th {
+            background: #38BDF8;
+            color: #fff;
+            font-weight: 600;
+        }
+        .earnings-table tr:nth-child(even) {
+            background: #1F2937;
+        }
+        .earnings-table tr:nth-child(odd) {
+            background: #232b36;
+        }
+        .earnings-table td {
+            color: var(--color-text-primary);
+        }
+        .earnings-table td:last-child {
+            font-weight: 700;
+        }
+        @media (max-width: 600px) {
+            .earnings-table th, .earnings-table td { padding: 5px 4px; font-size: 0.92rem; }
+        }
+    </style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,36 +163,66 @@ const earningsData = [
         name: 'Apple Inc.',
         ticker: 'AAPL',
         date: '2025-07-10',
+        history: [
+            { year: 2024, expected: 1.20, actual: 1.32 },
+            { year: 2023, expected: 1.15, actual: 1.18 },
+            { year: 2022, expected: 1.10, actual: 1.12 },
+        ]
     },
     {
         logo: 'https://logo.clearbit.com/microsoft.com',
         name: 'Microsoft Corp.',
         ticker: 'MSFT',
         date: '2025-07-12',
+        history: [
+            { year: 2024, expected: 2.45, actual: 2.51 },
+            { year: 2023, expected: 2.30, actual: 2.28 },
+            { year: 2022, expected: 2.10, actual: 2.15 },
+        ]
     },
     {
         logo: 'https://logo.clearbit.com/tesla.com',
         name: 'Tesla, Inc.',
         ticker: 'TSLA',
         date: '2025-07-15',
+        history: [
+            { year: 2024, expected: 0.90, actual: 0.95 },
+            { year: 2023, expected: 0.85, actual: 0.80 },
+            { year: 2022, expected: 0.70, actual: 0.72 },
+        ]
     },
     {
         logo: 'https://logo.clearbit.com/amazon.com',
         name: 'Amazon.com, Inc.',
         ticker: 'AMZN',
         date: '2025-07-18',
+        history: [
+            { year: 2024, expected: 0.65, actual: 0.70 },
+            { year: 2023, expected: 0.60, actual: 0.62 },
+            { year: 2022, expected: 0.55, actual: 0.50 },
+        ]
     },
     {
         logo: 'https://logo.clearbit.com/nvidia.com',
         name: 'NVIDIA Corporation',
         ticker: 'NVDA',
         date: '2025-07-20',
+        history: [
+            { year: 2024, expected: 1.80, actual: 1.95 },
+            { year: 2023, expected: 1.60, actual: 1.70 },
+            { year: 2022, expected: 1.40, actual: 1.38 },
+        ]
     },
     {
         logo: 'https://logo.clearbit.com/google.com',
         name: 'Alphabet Inc.',
         ticker: 'GOOGL',
         date: '2025-07-22',
+        history: [
+            { year: 2024, expected: 1.50, actual: 1.55 },
+            { year: 2023, expected: 1.40, actual: 1.38 },
+            { year: 2022, expected: 1.30, actual: 1.32 },
+        ]
     },
 ];
 
@@ -168,13 +237,25 @@ function renderEarningsCalendar() {
     earningsData.forEach(company => {
         const item = document.createElement('div');
         item.className = 'earnings-item';
+        let historyHtml = '';
+        if (company.history && company.history.length) {
+            historyHtml = `<div class="earnings-history">
+                <table class="earnings-table">
+                    <thead><tr><th>Year</th><th>Expected</th><th>Actual</th></tr></thead>
+                    <tbody>
+                        ${company.history.map(h => `<tr><td>${h.year}</td><td>${h.expected.toFixed(2)}</td><td>${h.actual.toFixed(2)}</td></tr>`).join('')}
+                    </tbody>
+                </table>
+            </div>`;
+        }
         item.innerHTML = `
             <img src="${company.logo}" alt="${company.name} logo" class="company-logo" onerror="this.src='assets/images/stocksmith.png'" />
             <div class="company-info">
                 <span class="company-name">${company.name}</span>
                 <span class="company-ticker">(${company.ticker})</span>
+                <span class="earnings-date"><i class="fa-regular fa-clock"></i> ${formatDate(company.date)}</span>
+                ${historyHtml}
             </div>
-            <span class="earnings-date"><i class="fa-regular fa-clock"></i> ${formatDate(company.date)}</span>
         `;
         list.appendChild(item);
     });
