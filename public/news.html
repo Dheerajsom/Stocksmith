@@ -125,13 +125,19 @@
 <script>
 const newsList = document.getElementById('news-list');
 
-async function fetchYahooFinanceNews() {
+async function fetchNews() {
     try {
         const response = await fetch('/api/news');
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.status);
+        }
         const data = await response.json();
+        if (!Array.isArray(data)) {
+            throw new Error('Unexpected response format');
+        }
         renderNews(data);
     } catch (error) {
-        newsList.innerHTML = '<div style="color:red;text-align:center;">Failed to load news.</div>';
+        newsList.innerHTML = `<div style="color:red;text-align:center;">Failed to load news.<br>${error.message}</div>`;
     }
 }
 
@@ -141,15 +147,15 @@ function renderNews(newsArray) {
         newsList.innerHTML += `
             <div class="news-card">
                 <div class="news-headline"><i class="fa-solid fa-bolt"></i> ${news.title}</div>
-                <div class="news-meta">${news.publisher} &bull; ${new Date(news.published_at).toLocaleDateString()}</div>
-                <div class="news-summary">${news.summary || ''}</div>
-                <a class="news-link" href="${news.link}" target="_blank" rel="noopener">Read more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <div class="news-meta">${news.source && news.source.name ? news.source.name : 'Unknown Source'} &bull; ${news.publishedAt ? new Date(news.publishedAt).toLocaleDateString() : ''}</div>
+                <div class="news-summary">${news.description || ''}</div>
+                <a class="news-link" href="${news.url}" target="_blank" rel="noopener">Read more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
         `;
     });
 }
 
-fetchYahooFinanceNews();
+fetchNews();
 </script>
 </body>
 </html>
