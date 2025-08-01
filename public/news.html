@@ -123,73 +123,33 @@
     </div>
 </footer>
 <script>
-// Example news data; in production, fetch from API
-const newsData = [
-    {
-        headline: "Apple Surges After Beating Earnings Expectations",
-        source: "Reuters",
-        date: "2025-07-18",
-        summary: "Apple Inc. reported quarterly earnings that surpassed Wall Street estimates, driven by strong iPhone sales and growth in services.",
-        url: "https://www.reuters.com/technology/apple-earnings-2025/"
-    },
-    {
-        headline: "Tesla Announces New Battery Technology at Annual Event",
-        source: "Bloomberg",
-        date: "2025-07-17",
-        summary: "Tesla unveiled its next-generation battery, promising longer range and lower costs, sending shares higher in after-hours trading.",
-        url: "https://www.bloomberg.com/news/articles/2025-07-17/tesla-battery-tech"
-    },
-    {
-        headline: "Microsoft Acquires AI Startup for $2 Billion",
-        source: "CNBC",
-        date: "2025-07-16",
-        summary: "Microsoft continues its push into artificial intelligence with the acquisition of a leading AI startup, expanding its cloud offerings.",
-        url: "https://www.cnbc.com/2025/07/16/microsoft-acquires-ai-startup.html"
-    },
-    {
-        headline: "Amazon Expands Same-Day Delivery to 50 More Cities",
-        source: "The Wall Street Journal",
-        date: "2025-07-15",
-        summary: "Amazon.com, Inc. announced a major expansion of its same-day delivery service, aiming to boost customer satisfaction and loyalty.",
-        url: "https://www.wsj.com/articles/amazon-same-day-delivery-2025"
-    },
-    {
-        headline: "NVIDIA Posts Record Revenue on AI Chip Demand",
-        source: "MarketWatch",
-        date: "2025-07-14",
-        summary: "NVIDIA reported record quarterly revenue, fueled by soaring demand for its AI chips in data centers and automotive sectors.",
-        url: "https://www.marketwatch.com/story/nvidia-record-revenue-2025"
-    },
-    {
-        headline: "Alphabet Launches New Privacy Tools for Search",
-        source: "TechCrunch",
-        date: "2025-07-13",
-        summary: "Alphabet Inc. introduced new privacy features for Google Search, giving users more control over their personal data online.",
-        url: "https://techcrunch.com/2025/07/13/google-search-privacy-tools/"
-    }
-];
+const newsList = document.getElementById('news-list');
 
-function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+async function fetchYahooFinanceNews() {
+    try {
+        const response = await fetch('/api/news');
+        const data = await response.json();
+        renderNews(data);
+    } catch (error) {
+        newsList.innerHTML = '<div style="color:red;text-align:center;">Failed to load news.</div>';
+    }
 }
 
-function renderNews() {
-    const list = document.getElementById('news-list');
-    list.innerHTML = '';
-    newsData.forEach(news => {
-        const card = document.createElement('div');
-        card.className = 'news-card';
-        card.innerHTML = `
-            <div class="news-headline"><i class="fa-solid fa-bolt"></i> ${news.headline}</div>
-            <div class="news-meta">${news.source} &bull; ${formatDate(news.date)}</div>
-            <div class="news-summary">${news.summary}</div>
-            <a class="news-link" href="${news.url}" target="_blank" rel="noopener">Read more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+function renderNews(newsArray) {
+    newsList.innerHTML = '';
+    newsArray.slice(0, 10).forEach(news => {
+        newsList.innerHTML += `
+            <div class="news-card">
+                <div class="news-headline"><i class="fa-solid fa-bolt"></i> ${news.title}</div>
+                <div class="news-meta">${news.publisher} &bull; ${new Date(news.published_at).toLocaleDateString()}</div>
+                <div class="news-summary">${news.summary || ''}</div>
+                <a class="news-link" href="${news.link}" target="_blank" rel="noopener">Read more <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
         `;
-        list.appendChild(card);
     });
 }
-renderNews();
+
+fetchYahooFinanceNews();
 </script>
 </body>
 </html>
